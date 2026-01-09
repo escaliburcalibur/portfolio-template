@@ -1,0 +1,470 @@
+/* ==================================================
+   RESET
+================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* ==================================================
+   CSS VARIABLES
+================================================== */
+:root {
+  /* Colors */
+  --bg-dark: #000;
+  --bg-light: #fff;
+  --fg-dark: #fff;
+  --fg-light: #000;
+  --card-dark: #1a1a1a;
+  --card-light: #eaeaea;
+  --muted: #666;
+
+  /* Radius */
+  --radius: 10px;
+
+  /* Fluid Typography */
+  --text-base: clamp(1rem, 2.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 3vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 4vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 5vw, 2rem);
+  --text-3xl: clamp(2rem, 6vw, 3rem);
+}
+
+/* ==================================================
+   BODY / MODES
+================================================== */
+body {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: var(--text-base);
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: var(--bg-dark);
+  color: var(--fg-dark);
+}
+
+body.light {
+  background: var(--bg-light);
+  color: var(--fg-light);
+}
+
+/* ==================================================
+   LAYOUT
+================================================== */
+.layout {
+  display: flex;
+  height: 100vh;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* ==================================================
+   SIDEBAR
+================================================== */
+.sidebar {
+  flex: 0 0 25%;
+  overflow-y: auto;
+}
+
+.sidebar-container {
+  padding: 0 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studio-name {
+  font-size: var(--text-xl);
+}
+
+/* ==================================================
+   PROJECT CARDS
+================================================== */
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.project-card {
+  padding: 1rem;
+  height: 100px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: var(--card-dark);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Hover logic per mode */
+body.dark .project-card:hover {
+  background: #2a2a2a;
+}
+
+body.light .project-card {
+  background: var(--card-light);
+}
+
+body.light .project-card:hover {
+  background: #d5d5d5;
+}
+
+/* ==================================================
+   CONTENT COLUMN
+================================================== */
+.content {
+  flex: 1;
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+body.light .content {
+  background: var(--card-light);
+}
+
+/* ==================================================
+   PROJECT VISIBILITY (SPA)
+================================================== */
+.project {
+  display: none;
+}
+
+.project.active {
+  display: block;
+}
+
+/* ==================================================
+   TYPOGRAPHY
+================================================== */
+h1 {
+  font-size: var(--text-3xl);
+}
+h2 {
+  font-size: var(--text-2xl);
+}
+h3 {
+  font-size: var(--text-xl);
+}
+p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ==================================================
+   ABOUT LAYOUT (TRABAJO 1)
+================================================== */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  height: 100%;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  text-align: right;
+  font-size: 22px;
+}
+
+.about-right {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  position: sticky;
+  overflow: hidden; /* no scrollea */
+  top: 0;
+}
+
+.right-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  overflow: hidden; /* no scrollea */
+}
+
+.about-box {
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: backdrop-filter 0.3s;
+  line-height: -10px;
+}
+.about-box2 {
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: backdrop-filter 0.3s;
+  line-height: -10px;
+  color: var(--muted);
+  font-size: 40px;
+  overflow: hidden; /* no scrollea */
+}
+body.light .about-box {
+  background: var(--card-light);
+}
+
+/* ==================================================
+   CASE STUDY (TRABAJO 2)
+================================================== */
+.case-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.case-row {
+  width: 100%;
+}
+
+.case-box {
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+body.light .case-box {
+  background: var(--card-light);
+}
+
+/* ROW DEFINITIONS */
+.row-1 .case-box {
+  height: 320px;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.row-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.row-4-right {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+}
+
+.row-5 {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 1rem;
+}
+
+.case-box.text {
+  padding: 1.5rem;
+}
+
+.project {
+  display: none;
+}
+
+.project.active {
+  display: block;
+}
+
+/* ==================================================
+   SWITCH
+================================================== */
+.switch {
+  position: relative;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch span {
+  position: absolute;
+  inset: 0;
+  background: #666;
+  border-radius: 999px;
+}
+
+.switch span::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #000;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+.switch input:checked + span::after {
+  transform: translateX(20px);
+}
+
+/* ==================================================
+   MOBILE FIRST
+================================================== */
+@media (max-width: 900px) {
+  .sidebar {
+    flex: 0 0 35%;
+  }
+}
+
+@media (max-width: 600px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .content {
+    width: 100%;
+  }
+
+  .about-layout,
+  .row-2,
+  .row-4,
+  .row-5 {
+    grid-template-columns: 1fr;
+  }
+
+  .about-right {
+    position: static;
+  }
+}
+
+/* ==================================================
+   PROJECT CARD – NEW STRUCTURE
+================================================== */
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  height: auto;
+  padding: 1rem 1.2rem;
+}
+
+/* HEADER */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.card-label {
+  font-weight: 500;
+}
+
+.card-action {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.card-action:hover {
+  opacity: 1;
+}
+
+/* BODY */
+.card-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ICON */
+.card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #ff4d00; /* fallback si no hay imagen */
+}
+
+.card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TEXT */
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.card-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* ==================================================
+   DARK / LIGHT MODE INTEGRATION
+================================================== */
+
+body.light .project-card {
+  background: var(--card-light);
+}
+
+body.dark .project-card {
+  background: var(--card-dark);
+}
+
+/* ==================================================
+   HOVER BEHAVIOUR (SMART)
+================================================== */
+
+body.light .project-card:hover {
+  background: #dcdcdc;
+}
+
+body.dark .project-card:hover {
+  background: #2a2a2a;
+}
+
+.project-card:hover .card-icon {
+  transform: scale(1.03);
+}
+
+.project-card .card-icon {
+  transition: transform 0.3s;
+}
